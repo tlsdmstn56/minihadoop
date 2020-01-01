@@ -1,0 +1,45 @@
+version: "3"
+services:
+  master:
+    build:
+      context: ..
+      dockerfile: docker/master/Dockerfile
+    ports:
+      - "5051:5051"
+    networks:
+      - minihadoop
+    domainname: master
+    hostname: master
+  slave1:
+    build:
+      context: ..
+      dockerfile: docker/slave/Dockerfile
+      args:
+        hostname: slave1
+    networks:
+      - minihadoop
+    domainname: slave1
+    hostname: slave
+  slave2:
+    build:
+      context: ..
+      dockerfile: docker/slave/Dockerfile
+      args:
+        hostname: slave2
+    networks:
+      - minihadoop
+    domainname: slave2
+    hostname: slave
+  slave3:
+    build:
+      context: ..
+      dockerfile: ./docker/slave/Dockerfile
+      args:
+        hostname: slave3
+    networks:
+      - minihadoop
+    domainname: slave3
+    hostname: slave
+
+networks:
+  minihadoop:

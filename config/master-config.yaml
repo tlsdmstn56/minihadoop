@@ -1,0 +1,12 @@
+version: 1
+
+#  master specific
+# user table
+user-table: ./config/user.yaml
+# welcom ports
+client-welcome-port: 15000
+slave-welcome-port: 5050
+
+# for health check
+health-check-period: 10 # in sec
+health-check-port: 10000

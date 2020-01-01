@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package cli;
+
+option java_package = "comnet.minihadoop.common.message.cli";
+//option java_outer_classname = "CLIMessageProtos";
+option java_multiple_files = true;
+
+message CLIMessage {
+    enum Type {
+        HEALTH_CHECK=0;
+        LOGIN_REQ = 1;
+        LOGIN_RES = 2;
+        UPLOAD_REQ = 3;
+        UPLOAD_RES=4;
+        UPLOAD_READY=5;
+        LS_REQ = 6;
+        LS_RES = 7;
+    }
+    Type type = 1;
+    oneof data {
+        HealthCheck hc = 2;
+        LoginRequest loginRequest = 3;
+        LoginResponse loginResponse = 4;
+        UploadRequest uploadRequest = 5;
+        UploadResponse uploadResponse = 6;
+        UploadReady uploadReady = 7;
+        ListRequest listRequest = 8;
+        ListResponse listResponse = 9;
+    }
+}
+
+message LoginRequest {
+    string ID = 1;
+    bytes password = 2;
+}
+
+message LoginResponse {
+    bool success = 1;
+    enum Type{
+        SUCCESS = 0;
+        WRONG_PW=1;
+        INVALID_ID=2;
+    }
+    Type error = 2;
+}
+
+message HealthCheck {
+    bool success = 1;
+}
+
+message UploadRequest {
+    string filename = 1;
+    int64 filesize = 2;
+}
+
+
+message UploadResponse {
+    enum Type{
+        SUCCESS = 0;
+        INTERNAL_ERROR =1;
+    }
+    Type status = 1;
+    string hostname = 2;
+    int32 port=3;
+}
+
+message UploadReady {
+    string hostname = 1;
+    int32 port = 2;
+}
+
+message ListRequest {
+    string path = 1;
+}
+
+message ListResponse {
+    message File {
+        string filename = 1;
+        int64 filesize = 2;
+    }
+    repeated File files = 1;
+}

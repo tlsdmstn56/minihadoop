@@ -1,0 +1,12 @@
+version: 1
+
+#  master information
+master-host: master
+master-welcome-port: 5050
+
+# slave information
+listening-port: 5051
+hostname: 192.168.35.97
+health-check-port: 10001
+data-dir: data
+master-discovery-timeout: 30 # in seconds

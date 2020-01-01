@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package healthcheck;
+
+option java_package = "comnet.minihadoop.common.message.healthcheck";
+option java_multiple_files = true;
+
+message HealthCheckAsk {
+  int32 id=1;
+}
+
+message HealthCheckResponse {
+  int32 id=1;
+}

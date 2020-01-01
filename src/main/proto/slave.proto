@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package slave;
+
+option java_package = "comnet.minihadoop.common.message.slave";
+option java_multiple_files = true;
+
+message Job {
+    enum Type {
+        UPLOAD_REQ = 0;
+        REPLICATE_READY_REQ = 1;
+        REPLICATE_REQ = 2;
+        REPLICATE_READY_RES = 3;
+        REPLICATE_RES = 4;
+    }
+    Type type = 1;
+    oneof data {
+        UploadRequest uploadRequest = 16;
+        ReplicateRequest replicateRequest = 17;
+        ReplicateReadyRequest replicationReadyRequest = 18;
+        ReplicateResponse replicateResponse = 19;
+        ReplicateReadyResponse replicationReadyResponse = 20;
+    }
+}
+
+message ConnectionRequest {
+    string hostname = 1;
+    int32 port = 2;
+    int32 healthCheckPort=3;
+}
+
+message ConnectionResponse {
+    int32 ack = 1;
+    int32 healthCheckPeriod = 2;
+    int32 healthCheckPort=3;
+}
+
+message UploadRequest {
+    string clientHostname = 1;
+    int32 clientPort = 2;
+    string filename = 3;
+    string userID = 4;
+    bool initial = 5;
+    string slave1Hostname = 6;
+    int32 slave1Port = 7;
+    string slave2Hostname = 8;
+    int32 slave2Port = 9;
+}
+
+message UploadResponse {
+    enum Type {
+        SUCCESS=0;
+        FAIL=1;
+    }
+    Type status = 1;
+}
+
+message ReplicateReadyRequest {
+    string filename = 3;
+    string userID = 4;
+}
+
+message ReplicateReadyResponse {
+    string hostname = 1;
+    int32 port = 2;
+}
+
+message ReplicateRequest {
+    string hostname = 1;
+    int32 port = 2;
+    string filename = 3;
+    string userID = 4;
+}
+
+message ReplicateResponse{
+    enum Type {
+        SUCCESS=0;
+        FAIL=1;
+    }
+    Type status = 1;
+}

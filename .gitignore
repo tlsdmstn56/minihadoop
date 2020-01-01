@@ -1,0 +1,8 @@
+/.gradle
+/.idea
+/.settings
+/bin
+/build
+/external
+/example-files
+/gradle

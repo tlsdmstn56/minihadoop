@@ -1,0 +1,11 @@
+version: 1
+
+#  master specific
+user-table: ./config/user.yaml
+client-welcome-port: 15000
+slave-welcome-port: 5050
+master-data-path: ./data
+master-host: master
+health-check-period: 10
+health-check-port: 10000
+slave-storage-size: 1GB

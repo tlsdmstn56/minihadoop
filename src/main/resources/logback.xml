@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration packagingData="true">
+    <appender name="main" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{HH:mm:ss.SSS} [%logger{10}] [%-5level] - %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="hchecker" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{HH:mm:ss.SSS} [%logger{10}] [%-5level] - %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <logger name="main" level="DEBUG" additivity="false">
+        <appender-ref ref="main"/>
+    </logger>
+    <logger name="hchecker" level="DEBUG" additivity="false">
+        <appender-ref ref="hchecker"/>
+    </logger>
+    <root level="debug">
+        <appender-ref ref="hchecker"/>
+        <appender-ref ref="main" />
+    </root>
+</configuration>

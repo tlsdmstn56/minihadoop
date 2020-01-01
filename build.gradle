@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+group 'comnet'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    finalizedBy shadowJar
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.25'
+    // https://mvnrepository.com/artifact/commons-cli/commons-cli
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile 'com.google.protobuf:protobuf-java:3.10.0'
+    // https://mvnrepository.com/artifact/me.tongfei/progressbar
+    compile group: 'me.tongfei', name: 'progressbar', version: '0.7.4'
+}
+
+task runMaster (type: JavaExec){
+    description = "Run Master Server"
+    main = 'comnet.minihadoop.master.Application'
+    classpath = sourceSets.main.runtimeClasspath
+    println("wd: "+workingDir)
+//    args('-f ./config/master-config.yaml')
+
+}
+
+task runSlave (type: JavaExec){
+    description = "Run Slave Server"
+    main = 'comnet.minihadoop.slave.Application'
+    classpath = sourceSets.main.runtimeClasspath
+//    args('-f ./config/slave-config.yaml')
+}
+
+task runProtoc(type:Exec) {
+    workingDir '.'
+    //on windows:
+    commandLine 'cmd', '/c',
+            'rmdir /Q /S .\\src\\main\\java\\comnet\\minihadoop\\common\\message 2>nul & ' +
+            '.\\external\\protoc\\bin\\protoc.exe --java_out=.\\src\\main\\java .\\src\\main\\proto\\*.proto'
+}
