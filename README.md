@@ -94,14 +94,14 @@ test                |      170460680
 
 ### HDFS Architecture
 
-![](./hadoop-architecture.jpg)
+![](./docs/hadoop-architecture.jpg)
 
 * Namenode: 마스터 노드로 파일의 위치, Data node(슬레이브 노드)를 관리한다.
 * Data noe: 슬레이브 노드로, 마스터 노드로부터 client의 명령을 받고(block ops), Read/Write가 필요할 때는 클라이언트와 직접 통신한다.
 
 ### 미니 하둡 architecture
 
-![](./architecture.jpg)
+![](./docs/architecture.jpg)
 
 * 유저
   * 마스터를 통해 파일 업로드 및 쿼리 가능
@@ -124,11 +124,11 @@ test                |      170460680
 4. 선택된 슬레이브 중 한 슬레이브에 파일을 전송한다.
 5. 파일을 전송받은 슬레이브가 다른 2개의 노드에 파일을 replicate한다.
 
-![](./upload.png)
+![](./docs/upload.png)
 
 ### Discovery & Health check
 
-![](./Discovery.png)
+![](./docs/Discovery.png)
 
 ## 구현 상세
 
